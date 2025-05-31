@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feitiçômetro do Humor</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { primary: '#2A0944', secondary: '#FFD700' }, borderRadius: { 'none': '0px', 'sm': '4px', DEFAULT: '8px', 'md': '12px', 'lg': '16px', 'xl': '20px', '2xl': '24px', '3xl': '32px', 'full': '9999px', 'button': '8px' } } } }</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+
+        @font-face {
+            font-family: 'HarryP';
+            src: url('https://cdn.jsdelivr.net/gh/Tevzi26/Harry-Potter-Font@master/HarryPotter-ov4z.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .font-harry {
+            font-family: 'HarryP', 'Cinzel Decorative', serif;
+        }
+
+        .magical-bg {
+            background-image: url('https://readdy.ai/api/search-image?query=Hogwarts%20castle%20interior%20with%20floating%20books%2C%20candles%2C%20and%20coffee%20cups%2C%20magical%20atmosphere%2C%20warm%20lighting%2C%20fantasy%2C%20mystical%2C%20Harry%20Potter%20inspired%2C%20detailed%2C%20high%20quality&width=375&height=762&seq=1&orientation=portrait');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .magical-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(42, 9, 68, 0.75);
+            z-index: 0;
+        }
+
+        .magical-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 3px solid #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5), 0 0 30px rgba(42, 9, 68, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .magical-card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: url('https://readdy.ai/api/search-image?query=ancient%20magical%20parchment%20texture%2C%20old%20paper%2C%20vintage%2C%20subtle%20pattern%2C%20light%20beige%20background&width=375&height=500&seq=2&orientation=portrait');
+            background-size: cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .mood-button {
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 215, 0, 0.7);
+            background-color: rgba(42, 9, 68, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mood-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .mood-button:hover::before {
+            left: 100%;
+        }
+
+        .mood-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+            border-color: #FFD700;
+        }
+
+        .magical-title {
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .spell-text {
+            background: linear-gradient(90deg, #2A0944, #FFD700, #2A0944);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: spell-glow 2s infinite;
+        }
+
+        @keyframes spell-glow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+            }
+
+            50% {
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.5);
+            }
+        }
+
+        .result-card-enter {
+            animation: cardReveal 0.8s ease-out forwards;
+            transform-origin: center;
+            opacity: 0;
+            transform: scale(0.8) translateY(20px);
+        }
+
+        @keyframes cardReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+
+            70% {
+                opacity: 1;
+                transform: scale(1.05) translateY(-5px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="magical-bg min-h-screen flex flex-col items-center relative">
+    <!-- Navbar -->
+    <nav class="fixed w-full top-0 z-50 bg-primary bg-opacity-90 shadow-lg px-4 py-3">
+        <div class="flex justify-center items-center">
+            <h1 class="font-['Pacifico'] text-xl text-secondary">logo</h1>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="relative z-10 flex-1 flex flex-col items-center justify-start w-full px-4 pt-20 pb-20">
+        <!-- Title -->
+        <div class="text-center mb-8 mt-4">
+            <h1 class="font-harry text-4xl text-secondary magical-title mb-2">Feitiçômetro do Humor</h1>
+            <p class="text-white text-lg font-medium">Como você está se sentindo hoje, bruxo(a)?</p>
+        </div>
+
+        <!-- Mood Selection Grid -->
+        <div class="grid grid-cols-2 gap-4 w-full max-w-md mb-8">
+            <button class="mood-button flex flex-col items-center justify-center p-4 rounded-button cursor-pointer"
+                data-mood="estressado">
+                <span class="text-3xl mb-2">😡</span>
+                <span class="text-white font-medium">Estressado(a)</span>
+            </button>
+            <button class="mood-button flex flex-col items-center justify-center p-4 rounded-button cursor-pointer"
+                data-mood="cansado">
+                <span class="text-3xl mb-2">😴</span>
+                <span class="text-white font-medium">Cansado(a)</span>
+            </button>
+            <button class="mood-button flex flex-col items-center justify-center p-4 rounded-button cursor-pointer"
+                data-mood="dramatico">
+                <span class="text-3xl mb-2">😭</span>
+                <span class="text-white font-medium">Dramático(a)</span>
+            </button>
+            <button class="mood-button flex flex-col items-center justify-center p-4 rounded-button cursor-pointer"
+                data-mood="inspirado">
+                <span class="text-3xl mb-2">🤩</span>
+                <span class="text-white font-medium">Inspirado(a)</span>
+            </button>
+            <button class="mood-button flex flex-col items-center justify-center p-4 rounded-button cursor-pointer"
+                data-mood="rindo">
+                <span class="text-3xl mb-2">😂</span>
+                <span class="text-white font-medium">Rindo à toa</span>
+            </button>
+            <button class="mood-button flex flex-col items-center justify-center p-4 rounded-button cursor-pointer"
+                data-mood="perdido">
+                <span class="text-3xl mb-2">😶‍🌫️</span>
+                <span class="text-white font-medium">Perdido(a)</span>
+            </button>
+        </div>
+
+        <!-- Random Mood Button -->
+        <button id="randomMood"
+            class="bg-secondary text-primary font-bold py-3 px-6 rounded-button shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center cursor-pointer mb-8">
+            <i class="ri-magic-line ri-lg mr-2"></i>
+            Sortear aleatoriamente
+        </button>
+
+        <!-- Result Card (Initially Hidden) -->
+        <div id="resultCard" class="hidden w-full max-w-md">
+            <div class="magical-card rounded-lg p-6 flex flex-col items-center">
+                <div class="mb-4 text-center">
+                    <h2 id="resultMood" class="font-harry text-2xl text-primary mb-1">Humor: <span></span></h2>
+                    <div class="h-1 w-3/4 mx-auto bg-secondary rounded-full"></div>
+                </div>
+
+                <div class="mb-4 w-full">
+                    <div class="flex items-center mb-3">
+                        <div class="w-8 h-8 flex items-center justify-center mr-2">
+                            <i class="ri-user-star-line ri-lg text-primary"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-primary">Personagem:</h3>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-20 h-20 overflow-hidden rounded-full mr-4 border-2 border-secondary">
+                            <img id="characterImage" src="" alt="Personagem" class="w-full h-full object-cover">
+                        </div>
+                        <p id="characterName" class="text-lg font-medium"></p>
+                    </div>
+                </div>
+
+                <div class="mb-4 w-full">
+                    <div class="flex items-center mb-2">
+                        <div class="w-8 h-8 flex items-center justify-center mr-2">
+                            <i class="ri-magic-line ri-lg text-primary"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-primary">Feitiço do dia:</h3>
+                    </div>
+                    <p id="spellName" class="text-xl font-harry spell-text text-center py-2"></p>
+                </div>
+
+                <div class="w-full">
+                    <div class="flex items-center mb-2">
+                        <div class="w-8 h-8 flex items-center justify-center mr-2">
+                            <i class="ri-chat-quote-line ri-lg text-primary"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-primary">Frase mágica:</h3>
+                    </div>
+                    <div class="bg-primary bg-opacity-10 p-4 rounded-lg border-l-4 border-secondary">
+                        <p id="magicPhrase" class="text-sm italic"></p>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-between w-full">
+                    <button id="newMood"
+                        class="bg-primary text-white font-medium py-2 px-4 rounded-button flex items-center justify-center cursor-pointer hover:bg-opacity-90 transition-all">
+                        <i class="ri-refresh-line ri-lg mr-1"></i>
+                        Retornar
+                    </button>
+                    <button id="shareResult"
+                        class="bg-secondary text-primary font-medium py-2 px-4 rounded-button flex items-center justify-center cursor-pointer hover:bg-opacity-90 transition-all">
+                        <i class="ri-share-line ri-lg mr-1"></i>
+                        Compartilhar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Tab Bar -->
+
+    <!-- Share Modal (Hidden by default) -->
+
+    <div id="shareModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg p-6 w-4/5 max-w-md">
+            <h3 class="text-xl font-bold text-primary mb-4">Compartilhar resultado</h3>
+            <div class="flex flex-col gap-3 mb-4">
+                <button id="shareWhatsApp"
+                    class="flex items-center justify-center gap-2 bg-[#25D366] text-white py-2 px-4 rounded-button cursor-pointer">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                        <i class="ri-whatsapp-line ri-lg"></i>
+                    </div>
+                    <span>WhatsApp</span>
+                </button>
+                <button id="shareInstagram"
+                    class="flex items-center justify-center gap-2 bg-[#E1306C] text-white py-2 px-4 rounded-button cursor-pointer">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                        <i class="ri-instagram-line ri-lg"></i>
+                    </div>
+                    <span>Instagram</span>
+                </button>
+
+            </div>
+            <button id="closeModal"
+                class="w-full bg-gray-200 text-gray-800 font-medium py-2 rounded-button cursor-pointer">Fechar</button>
+        </div>
+    </div>
+
+
+    <script id="moodData">
+        const moodData = {
+            estressado: {
+                emoji: "😡",
+                label: "Estressado(a)",
+                character: "Severo Snape",
+                characterImage: "https://readdy.ai/api/search-image?query=Severus%20Snape%20character%20from%20Harry%20Potter%2C%20serious%20expression%2C%20black%20robes%2C%20potion%20master%2C%20detailed%20portrait%2C%20high%20quality&width=200&height=200&seq=3&orientation=squarish",
+                spell: "Relaxa Tempestatis",
+                phrases: [
+                    "Você é uma mistura de Snape com café: amargo, essencial e com surtos ocasionais.",
+                    "Você tentou usar Obliviate no chefe, mas só esqueceu onde salvou o arquivo.",
+                    "Sua aura tá tão pesada que até um Dementador pediu folga.",
+                    "Você é basicamente um Bicho-Papão com CNPJ hoje.",
+                    "Se te derem uma varinha agora, vai sair fogo e processo.",
+                    "Seu humor hoje faria o Snape parecer um animador de festa infantil."
+                ]
+            },
+            cansado: {
+                emoji: "😴",
+                label: "Cansado(a)",
+                character: "Neville Longbottom",
+                characterImage: "https://readdy.ai/api/search-image?query=Neville%20Longbottom%20character%20from%20Harry%20Potter%2C%20tired%20expression%2C%20after%20Herbology%20class%2C%20detailed%20portrait%2C%20high%20quality&width=200&height=200&seq=4&orientation=squarish",
+                spell: "Sonequium Rapidus",
+                phrases: [
+                    "Você tá tão mole que nem o Dobby conseguiria te acordar com uma meia suja.",
+                    "Você tentou lançar Lumos, mas só acendeu o sono.",
+                    "Até o Trasgo Montanhês tá mais animado que você.",
+                    "Você pisca e acorda dois turnos depois.",
+                    "Seu Patrono apareceu e foi direto dormir de novo.",
+                    "Nem um feitiço de Revigoratum resolve sua alma cansada."
+                ]
+            },
+            dramatico: {
+                emoji: "😭",
+                label: "Dramático(a)",
+                character: "Bellatrix Lestrange",
+                characterImage: "https://readdy.ai/api/search-image?query=Bellatrix%20Lestrange%20character%20from%20Harry%20Potter%2C%20dramatic%20expression%2C%20wild%20hair%2C%20detailed%20portrait%2C%20high%20quality&width=200&height=200&seq=5&orientation=squarish",
+                spell: "Chorum Eternum",
+                phrases: [
+                    "Você não quer resolver o problema, quer performar. A Bellatrix aprova.",
+                    "Você chorou porque a caneta azul sumiu. Bellatrix sentiria orgulho.",
+                    "Sua TPM emocional chegou na fase 'teatral da dor'.",
+                    "Você reagiu ao e-mail como se fosse a Profecia Perdida.",
+                    "Cada boletim do banco é uma tragédia shakespeariana.",
+                    "Você se sente num duelo com a vida... e sem varinha."
+                ]
+            },
+            inspirado: {
+                emoji: "🤩",
+                label: "Inspirado(a)",
+                character: "Hermione Granger",
+                characterImage: "https://readdy.ai/api/search-image?query=Hermione%20Granger%20character%20from%20Harry%20Potter%2C%20excited%20expression%2C%20holding%20books%2C%20detailed%20portrait%2C%20high%20quality&width=200&height=200&seq=6&orientation=squarish",
+                spell: "Idearum Explodirus",
+                phrases: [
+                    "Você já planejou a semana, leu 3 livros e salvou o mundo. São 8 da manhã. Calma, Hermione.",
+                    "Você já criou um planner mágico com alarme de feitiços.",
+                    "Seus neurônios estão correndo de capa e varinha.",
+                    "Você tá tão produtivo que até o Dumbledore pediu dicas.",
+                    "Sua mente lançou Accio tudo resolvido e funcionou!",
+                    "Organizou seu armário, sua mente e o Ministério da Magia."
+                ]
+            },
+            rindo: {
+                emoji: "😂",
+                label: "Rindo à toa",
+                character: "Fred & George Weasley",
+                characterImage: "https://readdy.ai/api/search-image?query=Fred%20and%20George%20Weasley%20characters%20from%20Harry%20Potter%2C%20laughing%2C%20mischievous%20expression%2C%20detailed%20portrait%2C%20high%20quality&width=200&height=200&seq=7&orientation=squarish",
+                spell: "Risadum Maximus",
+                phrases: [
+                    "Você está a uma piada ruim de virar dono da Gemialidades Weasley.",
+                    "Você tá rindo de tudo, até da cara do Voldemort.",
+                    "Seu humor hoje é puro Poção do Riso vencida.",
+                    "Riu tanto que confundiram você com uma mandrágora feliz.",
+                    "Você fez três piadas ruins e duas viraram meme.",
+                    "O Chapéu Seletor te colocaria na zoeira eterna."
+                ]
+            },
+            perdido: {
+                emoji: "😶‍🌫️",
+                label: "Perdido(a)",
+                character: "Luna Lovegood",
+                characterImage: "https://readdy.ai/api/search-image?query=Luna%20Lovegood%20character%20from%20Harry%20Potter%2C%20dreamy%20expression%2C%20blonde%20hair%2C%20detailed%20portrait%2C%20high%20quality&width=200&height=200&seq=8&orientation=squarish",
+                spell: "Confusarium Delicatus",
+                phrases: [
+                    "Você se perdeu no caminho pra Hogwarts e foi parar no RH.",
+                    "Você esqueceu o que ia fazer... e agora tá no Pinterest astral.",
+                    "Lançou um Confundus em si mesmo sem querer.",
+                    "Sua mente tá mais viajada que um Nôitibus Andante.",
+                    "Você foi buscar foco e voltou com um giratempo quebrado.",
+                    "Seus pensamentos estão flutuando como corujas de madrugada."
+                ]
+            }
+        };
+    </script>
+
+
+    <script id="moodSelection">
+        document.addEventListener('DOMContentLoaded', function () {
+            const moodButtons = document.querySelectorAll('.mood-button');
+            const randomMoodButton = document.getElementById('randomMood');
+            const resultCard = document.getElementById('resultCard');
+            const newMoodButton = document.getElementById('newMood');
+            const shareButton = document.getElementById('shareResult');
+            const shareModal = document.getElementById('shareModal');
+            const closeModalButton = document.getElementById('closeModal');
+
+            const resultMoodElement = document.querySelector('#resultMood span');
+            const characterNameElement = document.getElementById('characterName');
+            const characterImageElement = document.getElementById('characterImage');
+            const spellNameElement = document.getElementById('spellName');
+            const magicPhraseElement = document.getElementById('magicPhrase');
+
+            const lastPhraseIndex = {};
+
+            function showResult(mood) {
+                const data = moodData[mood];
+                let randomIndex;
+
+                do {
+                    randomIndex = Math.floor(Math.random() * data.phrases.length);
+                } while (randomIndex === lastPhraseIndex[mood]);
+
+                lastPhraseIndex[mood] = randomIndex;
+
+                const phrase = data.phrases[randomIndex];
+
+                resultMoodElement.textContent = data.label;
+                characterNameElement.textContent = data.character;
+                characterImageElement.src = data.characterImage;
+                spellNameElement.textContent = data.spell;
+                magicPhraseElement.textContent = phrase;
+
+                resultCard.classList.remove('hidden');
+                resultCard.classList.add('result-card-enter');
+
+                setTimeout(() => {
+                    resultCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            }
+
+            moodButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const mood = this.getAttribute('data-mood');
+                    showResult(mood);
+                });
+            });
+
+            randomMoodButton.addEventListener('click', function () {
+                const moods = Object.keys(moodData);
+                const randomMood = moods[Math.floor(Math.random() * moods.length)];
+                showResult(randomMood);
+            });
+
+            newMoodButton.addEventListener('click', function () {
+                resultCard.classList.add('hidden');
+                resultCard.classList.remove('result-card-enter');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            shareButton.addEventListener('click', function () {
+                shareModal.classList.remove('hidden');
+            });
+
+            closeModalButton.addEventListener('click', function () {
+                shareModal.classList.add('hidden');
+            });
+
+            shareModal.addEventListener('click', function (e) {
+                if (e.target === shareModal) {
+                    shareModal.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+
+
+   <script id="particleEffects">
+    document.addEventListener('DOMContentLoaded', function () {
+        function createParticles(element) {
+            const particleContainer = document.createElement('div');
+            particleContainer.className = 'absolute inset-0 pointer-events-none overflow-hidden';
+            element.style.position = 'relative';
+            element.appendChild(particleContainer);
+
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'absolute rounded-full';
+                particle.style.width = `${Math.random() * 6 + 2}px`;
+                particle.style.height = particle.style.width;
+                particle.style.backgroundColor = Math.random() > 0.5 ? '#FFD700' : '#2A0944';
+                particle.style.opacity = '0';
+                particle.style.zIndex = '10';
+                particleContainer.appendChild(particle);
+            }
+
+            element.addEventListener('click', function (e) {
+                const rect = element.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const particles = particleContainer.querySelectorAll('div');
+                particles.forEach(particle => {
+                    particle.style.left = `${x}px`;
+                    particle.style.top = `${y}px`;
+
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = Math.random() * 60 + 20;
+                    const destinationX = x + Math.cos(angle) * distance;
+                    const destinationY = y + Math.sin(angle) * distance;
+
+                    particle.style.transition = 'none';
+                    particle.style.opacity = '0.8';
+
+                    setTimeout(() => {
+                        particle.style.transition = 'all 0.8s ease-out';
+                        particle.style.left = `${destinationX}px`;
+                        particle.style.top = `${destinationY}px`;
+                        particle.style.opacity = '0';
+                    }, 10);
+                });
+            });
+        }
+
+        // Partículas nos botões WhatsApp e Instagram
+        document.querySelectorAll('#shareWhatsApp, #shareInstagram').forEach(button => {
+            createParticles(button);
+        });
+
+        // Elementos com dados do resultado
+        const resultMoodElement = document.querySelector('#resultMood span');
+        const characterNameElement = document.getElementById('characterName');
+        const spellNameElement = document.getElementById('spellName');
+        const magicPhraseElement = document.getElementById('magicPhrase');
+
+        // Função para texto de compartilhamento
+        function getShareText() {
+            const mood = resultMoodElement ? resultMoodElement.textContent : '';
+            const character = characterNameElement ? characterNameElement.textContent : '';
+            const spell = spellNameElement ? spellNameElement.textContent : '';
+            const phrase = magicPhraseElement ? magicPhraseElement.textContent : '';
+
+            return `Meu resultado é: ${mood}\nPersonagem: ${character}\nFeitiço: ${spell}\nFrase: "${phrase}"\nTeste você também!`;
+        }
+
+        // WhatsApp
+        const shareWhatsApp = document.getElementById('shareWhatsApp');
+        shareWhatsApp.addEventListener('click', () => {
+            const text = encodeURIComponent(getShareText());
+            const url = `https://api.whatsapp.com/send?text=${text}`;
+            window.open(url, '_blank');
+        });
+
+        // Instagram (copiar texto para clipboard)
+        const shareInstagram = document.getElementById('shareInstagram');
+        shareInstagram.addEventListener('click', () => {
+            const moodLabel = resultMoodElement ? resultMoodElement.textContent : '';
+            const character = characterNameElement ? characterNameElement.textContent : '';
+            const spell = spellNameElement ? spellNameElement.textContent : '';
+            const phrase = magicPhraseElement ? magicPhraseElement.textContent : '';
+
+            const textToCopy = `Estou me sentindo ${moodLabel} ${spell} ✨\nPersonagem: ${character}\n"${phrase}"\n#HarryPotterMood`;
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert('Texto copiado! Agora cole no Instagram.');
+            }).catch(() => {
+                alert('Não foi possível copiar o texto.');
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>
